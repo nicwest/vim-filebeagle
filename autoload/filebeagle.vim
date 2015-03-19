@@ -498,6 +498,10 @@ function! s:NewDirectoryViewer()
             nnoremap <Plug>(FileBeagleBufferChangeVimLocalDirectory)            :call b:filebeagle_directory_viewer.change_vim_working_directory(1)<CR>
             let l:default_normal_plug_map['FileBeagleBufferChangeVimLocalDirectory'] = 'cl'
 
+            """ Movement Operations
+            nnoremap <Plug>(FileBeagleBufferMoveOffBottom) :exe 'norm!' line('.') == line('$') ? 'gg' :  'j'<CR>
+            nnoremap <Plug>(FileBeagleBufferMoveOffTop) :exe 'norm!' line('.') == 1 ? 'G' :  'k'<CR>
+
             if exists("g:filebeagle_buffer_normal_key_maps")
                 call extend(l:default_normal_plug_map, g:filebeagle_buffer_normal_key_maps)
             endif
@@ -610,6 +614,8 @@ function! s:NewDirectoryViewer()
         if g:filebeagle_buffer_map_movement_keys
             map <buffer> <silent> h <Plug>(FileBeagleBufferFocusOnParent)
             map <buffer> <silent> l <Plug>(FileBeagleBufferVisitTarget)
+            map <buffer> <silent> j <Plug>(FileBeagleBufferMoveOffBottom)
+            map <buffer> <silent> k <Plug>(FileBeagleBufferMoveOffTop)
         endif
 
 
