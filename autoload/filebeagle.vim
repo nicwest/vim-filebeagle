@@ -162,7 +162,7 @@ function! s:discover_paths(current_dir, glob_pattern, is_include_hidden, is_incl
             \ 'git check-ignore ' . l:current_dir . s:sep .  '*')
       let l:gitignored = split(l:gitignored_output, "\n")
       if !v:shell_error
-        call filter(paths, 'index(l:gitignored, v:val) == -1')
+        call filter(paths, 'index(l:gitignored, substitute(v:val, s:sep . s:sep, s:sep, "g")) == -1')
       endif
     endif
     call sort(paths)
